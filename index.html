@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d12">
+  <title>NİRVANA Studio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0b0d12;
+      color: #f3f2fa;
+      font-family: system-ui, sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    main {
+      width: 100%;
+      max-width: 600px;
+      padding: 32px;
+      border: 1px solid #302b48;
+      border-radius: 20px;
+      background: #12151d;
+    }
+    .logo {
+      color: #b5a5ff;
+      font-weight: 800;
+      letter-spacing: 4px;
+      font-size: 13px;
+    }
+    h1 {
+      font-size: clamp(30px, 8vw, 52px);
+      margin: 25px 0 12px;
+      line-height: 1.1;
+    }
+    h1 span { color: #a394ff; }
+    p { color: #a6a8ba; line-height: 1.7; }
+    button {
+      margin-top: 18px;
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #8570f7;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    #status {
+      color: #c6bbff;
+      min-height: 24px;
+      font-size: 13px;
+    }
+    footer { color: #74798b; font-size: 12px; margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo">N / STUDIO</div>
+    <h1>NİRVANA<br><span>#BAŞLIYORUZ</span></h1>
+    <p>
+      Discord sunucunu kendi kurallarına göre tasarla.
+      Kategorileri, kanalları, rolleri ve izinleri
+      tek bir panelden yönet.
+    </p>
+    <button id="start">Kuruluma Başla →</button>
+    <p id="status" aria-live="polite"></p>
+    <footer>NİRVANA Studio · Kişisel sunucu kurucu</footer>
+  </main>
+  <script>
+    document.getElementById("start").addEventListener("click", () => {
+      document.getElementById("status").textContent =
+        "Kurulum paneli hazırlanıyor. Bir sonraki aşamada burada açılacak.";
+    });
+  </script>
+</body>
+</html>

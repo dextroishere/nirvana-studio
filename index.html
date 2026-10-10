@@ -2,81 +2,734 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0d12">
-  <title>NİRVANA Studio</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #0b0d12;
-      color: #f3f2fa;
-      font-family: system-ui, sans-serif;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-    main {
-      width: 100%;
-      max-width: 600px;
-      padding: 32px;
-      border: 1px solid #302b48;
-      border-radius: 20px;
-      background: #12151d;
-    }
-    .logo {
-      color: #b5a5ff;
-      font-weight: 800;
-      letter-spacing: 4px;
-      font-size: 13px;
-    }
-    h1 {
-      font-size: clamp(30px, 8vw, 52px);
-      margin: 25px 0 12px;
-      line-height: 1.1;
-    }
-    h1 span { color: #a394ff; }
-    p { color: #a6a8ba; line-height: 1.7; }
-    button {
-      margin-top: 18px;
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 10px;
-      background: #8570f7;
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    #status {
-      color: #c6bbff;
-      min-height: 24px;
-      font-size: 13px;
-    }
-    footer { color: #74798b; font-size: 12px; margin-top: 28px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b19">
+<title>NİRVANA STUDIO</title>
+<style>
+:root {
+  --bg:#0c0912;
+  --panel:#171120;
+  --line:#382747;
+  --purple:#a855f7;
+  --text:#f4edff;
+  --muted:#aa9bbd;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:Arial,system-ui,sans-serif;
+}
+header {
+  padding:16px; background:#110b1b;
+  border-bottom:1px solid var(--line);
+}
+.brand {display:flex;align-items:center;gap:12px}
+.logo {
+  width:43px;height:43px;border-radius:13px;
+  display:grid;place-items:center;font-size:22px;font-weight:bold;
+  background:linear-gradient(135deg,#c084fc,#6d28d9);
+}
+h1 {font-size:18px;margin:0}
+.sub {font-size:11px;color:var(--muted);margin-top:4px}
+main {max-width:950px;margin:auto;padding:15px}
+.hero,.panel {
+  padding:17px;background:var(--panel);
+  border:1px solid var(--line);border-radius:15px;margin-bottom:14px;
+}
+.hero {
+  background:radial-gradient(ellipse at top right,#54247b66,transparent 70%),var(--panel);
+  padding:24px 18px;
+}
+.hero h2 {font-size:25px;margin:16px 0 8px}
+.muted {font-size:12px;color:var(--muted);line-height:1.6}
+.pill {
+  font-size:11px;color:#e9d5ff;padding:6px 9px;
+  border:1px solid #9333ea66;border-radius:20px;
+}
+.tabs {display:flex;gap:7px;overflow-x:auto;margin-bottom:13px}
+button,.btn {
+  padding:10px 12px;border-radius:10px;
+  border:1px solid var(--line);background:#21172e;color:var(--text);
+}
+button {cursor:pointer}
+.tab.active,.primary {
+  background:linear-gradient(135deg,#9333ea,#6d28d9);
+  border-color:var(--purple);color:white;
+}
+.danger {background:#451523;color:#fecdd3}
+.page.hidden {display:none}
+.grid {display:grid;grid-template-columns:1fr;gap:12px}
+h3 {font-size:16px;margin:0 0 13px}
+input,select {
+  width:100%;padding:11px;background:#0e0a15;color:var(--text);
+  border:1px solid var(--line);border-radius:9px;
+}
+label.muted {display:block;margin:10px 0 5px}
+.row {display:flex;gap:8px}
+.row input {flex:1;min-width:0}
+.item {
+  background:#110c19;border:1px solid var(--line);
+  border-radius:10px;padding:11px;margin-top:9px;
+}
+.itemtop {display:flex;align-items:center;justify-content:space-between;gap:8px}
+.itemname {font-weight:bold;overflow-wrap:anywhere}
+.actions {display:flex;gap:5px;flex-wrap:wrap}
+.small {font-size:11px;padding:7px}
+.tag {font-size:11px;color:var(--muted);margin-top:5px}
+.empty {padding:16px;text-align:center;color:var(--muted);font-size:13px}
+.checks {display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.check {
+  display:flex;align-items:center;gap:6px;padding:8px;
+  border:1px solid var(--line);border-radius:8px;font-size:11px;
+}
+.check input {width:15px;height:15px;accent-color:var(--purple)}
+.preview {border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.serverbar {padding:13px;background:#292035;font-weight:bold}
+.serverbar small {display:block;color:var(--muted);font-weight:normal;margin-top:4px}
+.channelarea {padding:12px;background:#14111c}
+.cathead {font-size:11px;color:#b7a9c8;font-weight:bold;margin:14px 0 6px}
+.channel {padding:8px;color:#c7bbd4;font-size:13px;overflow-wrap:anywhere}
+.channel:before {content:"# ";color:#8e7ba6}
+.channel.voice:before {content:"◖ "}
+.rolecolor {display:inline-block;width:16px;height:16px;border-radius:50%;vertical-align:middle}
+.status {font-size:12px;color:#4ade80;margin-top:10px}
+hr {border:0;border-top:1px solid var(--line);margin:15px 0}
+.footer {text-align:center;color:var(--muted);font-size:11px;padding:16px}
+@media(min-width:720px) {
+  main {padding:24px}
+  .grid {grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
 <body>
-  <main>
-    <div class="logo">N / STUDIO</div>
-    <h1>NİRVANA<br><span>#BAŞLIYORUZ</span></h1>
-    <p>
-      Discord sunucunu kendi kurallarına göre tasarla.
-      Kategorileri, kanalları, rolleri ve izinleri
-      tek bir panelden yönet.
-    </p>
-    <button id="start">Kuruluma Başla →</button>
-    <p id="status" aria-live="polite"></p>
-    <footer>NİRVANA Studio · Kişisel sunucu kurucu</footer>
-  </main>
-  <script>
-    document.getElementById("start").addEventListener("click", () => {
-      document.getElementById("status").textContent =
-        "Kurulum paneli hazırlanıyor. Bir sonraki aşamada burada açılacak.";
+<header>
+  <div class="brand">
+    <div class="logo">N</div>
+    <div>
+      <h1>NİRVANA STUDIO</h1>
+      <div class="sub">#BAŞLIYORUZ · DISCORD KURULUM PANELİ</div>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <span class="pill">✦ KENDİ SUNUCUNU TASARLA</span>
+    <h2>Hayalindeki sunucuyu oluştur.</h2>
+    <p class="muted">Kategorilerini, kanallarını ve rollerini tek panelden düzenle.</p>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="channels">📁 Kanallar</button>
+    <button class="tab" data-tab="roles">🎭 Roller</button>
+    <button class="tab" data-tab="preview">👁️ Önizleme</button>
+    <button class="tab" data-tab="settings">⚙️ Ayarlar</button>
+  </nav>
+
+  <section id="channels" class="page">
+    <div class="grid">
+      <div class="panel">
+        <h3>📁 Kategori oluştur</h3>
+        <div class="row">
+          <input id="catName" placeholder="Örn. GENEL" maxlength="60">
+          <button class="primary" id="addCat">Ekle</button>
+        </div>
+        <div id="categoryList"></div>
+      </div>
+      <div class="panel">
+        <h3>💬 Kanal oluştur</h3>
+        <label class="muted" for="channelName">Kanal adı</label>
+        <input id="channelName" placeholder="sohbet" maxlength="80">
+        <label class="muted" for="channelCat">Kategori</label>
+        <select id="channelCat"></select>
+        <label class="muted" for="channelType">Kanal türü</label>
+        <select id="channelType">
+          <option value="text">Metin kanalı</option>
+          <option value="voice">Ses kanalı</option>
+        </select>
+        <p><button class="primary" id="addChannel" style="width:100%">＋ Kanal ekle</button></p>
+        <hr>
+        <h3>Mevcut kanallar</h3>
+        <div id="channelList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roles" class="page hidden">
+    <div class="panel">
+      <h3>🎭 Yeni rol oluştur</h3>
+      <label class="muted" for="roleName">Rol adı</label>
+      <input id="roleName" placeholder="Örn. Moderatör" maxlength="60">
+      <label class="muted" for="roleColor">Rol rengi</label>
+      <input id="roleColor" type="color" value="#a855f7">
+      <p><button class="primary" id="addRole" style="width:100%">＋ Rol oluştur</button></p>
+    </div>
+    <div class="panel">
+      <h3>🛡️ Roller ve izinler</h3>
+      <p class="muted">İzinler şimdilik taslak olarak saklanır.</p>
+      <div id="roleList"></div>
+    </div>
+  </section>
+
+  <section id="preview" class="page hidden">
+    <div class="panel">
+      <h3>👁️ Sunucu önizlemesi</h3>
+      <div class="preview">
+        <div class="serverbar" id="previewName">NİRVANA<small>Sunucu taslağı</small></div>
+        <div class="channelarea" id="previewChannels"></div>
+      </div>
+      <hr>
+      <h3>🎭 Rol listesi</h3>
+      <div id="previewRoles"></div>
+    </div>
+  </section>
+
+  <section id="settings" class="page hidden">
+    <div class="panel">
+      <h3>⚙️ Sunucu ayarları</h3>
+      <label class="muted" for="serverName">Sunucu adı</label>
+      <input id="serverName" value="NİRVANA" maxlength="100">
+      <p><button class="primary" id="saveName" style="width:100%">Adı güncelle</button></p>
+    </div>
+    <div class="panel">
+      <h3>💾 Taslağı yönet</h3>
+      <p class="muted">Ayarların bu tarayıcıda saklanır. JSON olarak dışa da aktarabilirsin.</p>
+      <button class="primary" id="saveData" style="width:100%">Şimdi kaydet</button>
+      <p><button id="exportData" style="width:100%">📦 JSON dışa aktar</button></p>
+      <label class="btn" for="importFile" style="display:block;text-align:center">📥 JSON içe aktar</label>
+      <input id="importFile" type="file" accept=".json,application/json" hidden>
+      <div class="status" id="status"></div>
+    </div>
+    <div class="panel">
+      <h3>🔒 Güvenlik</h3>
+      <p class="muted">Bu sürüm Discord'a bağlanmaz; yalnızca taslak hazırlar. Bot tokenini GitHub koduna ekleme.</p>
+      <button class="danger" id="resetData" style="width:100%">Taslağı sıfırla</button>
+    </div>
+  </section>
+  <div class="footer">NİRVANA STUDIO · #BAŞLIYORUZ</div>
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  const STORAGE_KEY = "nirvanaStudioDataV1";
+
+  const defaultData = () => ({
+    serverName: "NİRVANA",
+    categories: [
+      { id: "cat1", name: "GENEL" }
+    ],
+    channels: [
+      { id: "ch1", name: "sohbet", categoryId: "cat1", type: "text" },
+      { id: "ch2", name: "duyurular", categoryId: "cat1", type: "text" },
+      { id: "ch3", name: "Sesli Sohbet", categoryId: "cat1", type: "voice" }
+    ],
+    roles: [
+      { id: "r1", name: "Kurucu", color: "#ef4444", permissions: [] },
+      { id: "r2", name: "Yönetici", color: "#a855f7", permissions: [] },
+      { id: "r3", name: "Üye", color: "#60a5fa", permissions: [] }
+    ]
+  });
+
+  let data = defaultData();
+
+  function makeId() {
+    return Date.now().toString(36) +
+      Math.random().toString(36).slice(2, 8);
+  }
+
+  function safe(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  function setStatus(message, error = false) {
+    $("status").textContent = message;
+    $("status").style.color = error ? "#fb7185" : "#4ade80";
+  }
+
+  function saveToStorage(showMessage = false) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (showMessage) setStatus("✓ Taslak bu tarayıcıya kaydedildi.");
+      return true;
+    } catch (error) {
+      if (showMessage) {
+        setStatus("Kaydedilemedi. Tarayıcı depolamasını kontrol et.", true);
+      }
+      return false;
+    }
+  }
+
+  function loadFromStorage() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+
+      const parsed = JSON.parse(saved);
+
+      if (
+        parsed &&
+        Array.isArray(parsed.categories) &&
+        Array.isArray(parsed.channels) &&
+        Array.isArray(parsed.roles)
+      ) {
+        data = {
+          ...defaultData(),
+          ...parsed
+        };
+      }
+    } catch (error) {
+      data = defaultData();
+    }
+  }
+
+  function renderCategories() {
+    const list = $("categoryList");
+
+    if (data.categories.length === 0) {
+      list.innerHTML = '<div class="empty">Henüz kategori yok.</div>';
+    } else {
+      list.innerHTML = data.categories.map(category => `
+        <div class="item">
+          <div class="itemtop">
+            <span class="itemname">📁 ${safe(category.name)}</span>
+            <div class="actions">
+              <button class="small" data-rename-cat="${safe(category.id)}">Düzenle</button>
+              <button class="small danger" data-delete-cat="${safe(category.id)}">Sil</button>
+            </div>
+          </div>
+          <div class="tag">
+            ${data.channels.filter(channel => channel.categoryId === category.id).length} kanal
+          </div>
+        </div>
+      `).join("");
+    }
+
+    const select = $("channelCat");
+    const previous = select.value;
+
+    select.innerHTML = data.categories.length
+      ? data.categories.map(category =>
+          `<option value="${safe(category.id)}">${safe(category.name)}</option>`
+        ).join("")
+      : '<option value="">Önce kategori oluştur</option>';
+
+    if (data.categories.some(category => category.id === previous)) {
+      select.value = previous;
+    }
+  }
+
+  function renderChannels() {
+    const list = $("channelList");
+
+    if (data.channels.length === 0) {
+      list.innerHTML = '<div class="empty">Henüz kanal yok.</div>';
+      return;
+    }
+
+    list.innerHTML = data.channels.map(channel => {
+      const category = data.categories.find(
+        item => item.id === channel.categoryId
+      );
+
+      return `
+        <div class="item">
+          <div class="itemtop">
+            <span class="itemname">
+              ${channel.type === "voice" ? "🔊" : "#"}
+              ${safe(channel.name)}
+            </span>
+            <div class="actions">
+              <button class="small" data-rename-channel="${safe(channel.id)}">Düzenle</button>
+              <button class="small danger" data-delete-channel="${safe(channel.id)}">Sil</button>
+            </div>
+          </div>
+          <div class="tag">
+            Kategori: ${safe(category ? category.name : "Kategorisiz")}
+            · ${channel.type === "voice" ? "Ses kanalı" : "Metin kanalı"}
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  const permissionOptions = [
+    ["view", "Kanalları gör"],
+    ["send", "Mesaj gönder"],
+    ["manage", "Kanalları yönet"],
+    ["members", "Üyeleri yönet"],
+    ["moderate", "Üyeleri denetle"],
+    ["admin", "Yönetici taslağı"]
+  ];
+
+  function renderRoles() {
+    const list = $("roleList");
+
+    if (data.roles.length === 0) {
+      list.innerHTML = '<div class="empty">Henüz rol yok.</div>';
+      return;
+    }
+
+    list.innerHTML = data.roles.map(role => `
+      <div class="item">
+        <div class="itemtop">
+          <span class="itemname">
+            <span class="rolecolor" style="background:${safe(role.color)}"></span>
+            ${safe(role.name)}
+          </span>
+          <div class="actions">
+            <button class="small" data-rename-role="${safe(role.id)}">Düzenle</button>
+            <button class="small danger" data-delete-role="${safe(role.id)}">Sil</button>
+          </div>
+        </div>
+
+        <div class="checks">
+          ${permissionOptions.map(([key, label]) => `
+            <label class="check">
+              <input
+                type="checkbox"
+                data-role-permission="${safe(role.id)}"
+                value="${safe(key)}"
+                ${role.permissions.includes(key) ? "checked" : ""}
+              >
+              ${safe(label)}
+            </label>
+          `).join("")}
+        </div>
+
+        <div class="tag">İzinler taslaktır; Discord'da uygulanmaz.</div>
+      </div>
+    `).join("");
+  }
+
+  function renderPreview() {
+    $("previewName").innerHTML =
+      `${safe(data.serverName)}<small>Sunucu taslağı · Önizleme</small>`;
+
+    if (data.categories.length === 0) {
+      $("previewChannels").innerHTML =
+        '<div class="empty">Henüz kategori oluşturulmadı.</div>';
+    } else {
+      $("previewChannels").innerHTML = data.categories.map(category => {
+        const channels = data.channels.filter(
+          channel => channel.categoryId === category.id
+        );
+
+        return `
+          <div class="cathead">${safe(category.name.toUpperCase())}</div>
+          ${channels.length
+            ? channels.map(channel => `
+                <div class="channel ${channel.type === "voice" ? "voice" : ""}">
+                  ${safe(channel.name)}
+                </div>
+              `).join("")
+            : '<div class="tag">Bu kategoride kanal yok.</div>'
+          }
+        `;
+      }).join("");
+    }
+
+    $("previewRoles").innerHTML = data.roles.length
+      ? data.roles.map(role => `
+          <div class="item">
+            <span class="rolecolor" style="background:${safe(role.color)}"></span>
+            <strong>${safe(role.name)}</strong>
+          </div>
+        `).join("")
+      : '<div class="empty">Henüz rol yok.</div>';
+  }
+
+  function renderAll() {
+    $("serverName").value = data.serverName;
+    renderCategories();
+    renderChannels();
+    renderRoles();
+    renderPreview();
+  }
+
+  // 3. parçada olaylar ve düğmeler eklenecek.
+  
+  $("addCat").addEventListener("click", () => {
+    const name = $("catName").value.trim();
+
+    if (!name) {
+      $("catName").focus();
+      return;
+    }
+
+    if (data.categories.some(c => c.name.toLowerCase() === name.toLowerCase())) {
+      alert("Bu kategori zaten var.");
+      return;
+    }
+
+    data.categories.push({ id: makeId(), name });
+    $("catName").value = "";
+    renderAll();
+    saveToStorage();
+  });
+
+  $("catName").addEventListener("keydown", event => {
+    if (event.key === "Enter") $("addCat").click();
+  });
+
+  $("addChannel").addEventListener("click", () => {
+    const name = $("channelName").value.trim();
+    const categoryId = $("channelCat").value;
+    const type = $("channelType").value;
+
+    if (!name) {
+      $("channelName").focus();
+      return;
+    }
+
+    if (!categoryId) {
+      alert("Önce bir kategori oluştur.");
+      return;
+    }
+
+    data.channels.push({
+      id: makeId(),
+      name: name.replace(/^#+/, "").replace(/^🔊\s*/, ""),
+      categoryId,
+      type
     });
-  </script>
+
+    $("channelName").value = "";
+    renderAll();
+    saveToStorage();
+  });
+
+  $("addRole").addEventListener("click", () => {
+    const name = $("roleName").value.trim();
+
+    if (!name) {
+      $("roleName").focus();
+      return;
+    }
+
+    if (data.roles.some(r => r.name.toLowerCase() === name.toLowerCase())) {
+      alert("Bu rol zaten var.");
+      return;
+    }
+
+    data.roles.push({
+      id: makeId(),
+      name,
+      color: $("roleColor").value,
+      permissions: []
+    });
+
+    $("roleName").value = "";
+    renderAll();
+    saveToStorage();
+  });
+
+  document.querySelectorAll(".tab").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.toggle("active", tab === button);
+      });
+
+      document.querySelectorAll(".page").forEach(page => {
+        page.classList.toggle("hidden", page.id !== button.dataset.tab);
+      });
+
+      if (button.dataset.tab === "preview") renderPreview();
+    });
+  });
+
+  document.addEventListener("click", event => {
+    const target = event.target.closest("button");
+    if (!target) return;
+
+    if (target.dataset.deleteCat) {
+      const id = target.dataset.deleteCat;
+
+      if (!confirm("Kategori ve içindeki kanallar silinsin mi?")) return;
+
+      data.categories = data.categories.filter(c => c.id !== id);
+      data.channels = data.channels.filter(c => c.categoryId !== id);
+      renderAll();
+      saveToStorage();
+    }
+
+    if (target.dataset.renameCat) {
+      const category = data.categories.find(c => c.id === target.dataset.renameCat);
+      if (!category) return;
+
+      const name = prompt("Yeni kategori adı:", category.name);
+      if (name && name.trim()) {
+        category.name = name.trim();
+        renderAll();
+        saveToStorage();
+      }
+    }
+
+    if (target.dataset.deleteChannel) {
+      data.channels = data.channels.filter(
+        c => c.id !== target.dataset.deleteChannel
+      );
+      renderAll();
+      saveToStorage();
+    }
+
+    if (target.dataset.renameChannel) {
+      const channel = data.channels.find(
+        c => c.id === target.dataset.renameChannel
+      );
+      if (!channel) return;
+
+      const name = prompt("Yeni kanal adı:", channel.name);
+      if (name && name.trim()) {
+        channel.name = name.trim();
+        renderAll();
+        saveToStorage();
+      }
+    }
+
+    if (target.dataset.deleteRole) {
+      data.roles = data.roles.filter(r => r.id !== target.dataset.deleteRole);
+      renderAll();
+      saveToStorage();
+    }
+
+    if (target.dataset.renameRole) {
+      const role = data.roles.find(r => r.id === target.dataset.renameRole);
+      if (!role) return;
+
+      const name = prompt("Yeni rol adı:", role.name);
+      if (name && name.trim()) {
+        role.name = name.trim();
+        renderAll();
+        saveToStorage();
+      }
+    }
+  });
+
+  document.addEventListener("change", event => {
+    const input = event.target;
+
+    if (input.matches("[data-role-permission]")) {
+      const role = data.roles.find(
+        r => r.id === input.dataset.rolePermission
+      );
+      if (!role) return;
+
+      if (input.checked && !role.permissions.includes(input.value)) {
+        role.permissions.push(input.value);
+      } else if (!input.checked) {
+        role.permissions = role.permissions.filter(p => p !== input.value);
+      }
+
+      saveToStorage();
+    }
+  });
+
+  $("saveName").addEventListener("click", () => {
+    const name = $("serverName").value.trim();
+
+    if (!name) {
+      alert("Sunucu adı boş olamaz.");
+      return;
+    }
+
+    data.serverName = name;
+    renderPreview();
+    saveToStorage();
+    setStatus("✓ Sunucu adı güncellendi.");
+  });
+
+  $("saveData").addEventListener("click", () => {
+    saveToStorage(true);
+  });
+
+  $("exportData").addEventListener("click", () => {
+    const blob = new Blob(
+      [JSON.stringify(data, null, 2)],
+      { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "nirvana-studio.json";
+    link.click();
+    URL.revokeObjectURL(url);
+
+    setStatus("✓ JSON dosyası dışa aktarıldı.");
+  });
+
+  $("importFile").addEventListener("change", async event => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const imported = JSON.parse(await file.text());
+
+      if (
+        !imported ||
+        !Array.isArray(imported.categories) ||
+        !Array.isArray(imported.channels) ||
+        !Array.isArray(imported.roles)
+      ) {
+        throw new Error("Geçersiz dosya");
+      }
+
+      data = {
+        serverName: String(imported.serverName || "NİRVANA"),
+        categories: imported.categories.map(c => ({
+          id: String(c.id || makeId()),
+          name: String(c.name || "Yeni kategori")
+        })),
+        channels: imported.channels.map(c => ({
+          id: String(c.id || makeId()),
+          name: String(c.name || "yeni-kanal"),
+          categoryId: String(c.categoryId || ""),
+          type: c.type === "voice" ? "voice" : "text"
+        })),
+        roles: imported.roles.map(r => ({
+          id: String(r.id || makeId()),
+          name: String(r.name || "Yeni rol"),
+          color: /^#[0-9a-f]{6}$/i.test(r.color) ? r.color : "#a855f7",
+          permissions: Array.isArray(r.permissions)
+            ? r.permissions.filter(p => typeof p === "string")
+            : []
+        }))
+      };
+
+      renderAll();
+      saveToStorage();
+      setStatus("✓ Taslak içe aktarıldı.");
+    } catch (error) {
+      setStatus("Dosya okunamadı. Geçerli bir JSON seç.", true);
+    }
+
+    event.target.value = "";
+  });
+
+  $("resetData").addEventListener("click", () => {
+    if (!confirm("Bütün taslağın silinip başlangıç ayarlarına dönülsün mü?")) {
+      return;
+    }
+
+    data = defaultData();
+    renderAll();
+    saveToStorage();
+    setStatus("✓ Taslak sıfırlandı.");
+  });
+
+  loadFromStorage();
+  renderAll();
+})();
+</script>
 </body>
 </html>
+
+
